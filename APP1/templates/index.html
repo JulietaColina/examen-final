@@ -1,0 +1,74 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Hotel Alonso {%endblock%}
+{%block content%}
+<main>
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-end">
+                    <h2 class="text-white font-weight-bold">Sistema de Gestión Hotelero</h2>
+                    <hr class="divider" />
+                    <h1 class="text-white font-weight-bold">Hotel Alonso</h1>
+                    <hr class="divider" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 mb-5">Esta es una herramienta clave para garantizar una experiencia satisfactoria del cliente. Este sistema de gestión hotelera proporciona información crítica para las tareas diarias y la administración del hotel, como el estado y el inventario de las habitaciones, la ocupación, las llegadas y las salidas.</p>
+                    <a class="btn btn-primary btn-xl" href="{%url 'reservas'%}">Nueva Reserva</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- About-->
+    <section class="page-section bg-primary">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">Habitaciones disponibles</h2>
+                    <hr class="divider divider-light" />
+                    <p class="text-white-75 mb-4">La mejor relación calidad-precio de la zona</p>
+                    <a class="btn btn-light btn-xl" href="{% url 'habitaciones'%}">Habitaciones</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container px-4 px-lg-5">
+            <h2 class="text-center mt-0">Nuestros Servicios a su disposción</h2>
+            <hr class="divider" />
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Internet</h3>
+                        <p class="text-muted mb-0">Conexión 4G</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Habitación para tu necesidad</h3>
+                        <p class="text-muted mb-0">Familiar- Matrimonial- Individual- Suit</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">Catering</h3>
+                        <p class="text-muted mb-0">Las 24h abierto</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                        <h3 class="h4 mb-2">La mejor atención</h3>
+                        <p class="text-muted mb-0">Cordialidad y respeto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio-->
+</main>
+{%endblock%}

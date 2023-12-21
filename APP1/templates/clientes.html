@@ -1,0 +1,45 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Hotel Alonso - Clientes {%endblock%}
+{%block content%}
+<main>
+
+    <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">CLIENTES</h2>
+                    <hr class="divider" />
+                    <img class="img-fluid" src="{%static 'img/cliente.png'%}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="container px-4 px-lg-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Cod</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Género</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in clientes %}
+                <tr>
+                    <th scope="row">{{c.id}}</th>
+                    <td>{{c.dni}}</td>
+                    <td>{{c.nombre}}</td>
+                    <td>{{c.apellido}}</td>
+                    <td>{{c.tel}}</td>
+                    <td>{{c.género}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{%endblock%}

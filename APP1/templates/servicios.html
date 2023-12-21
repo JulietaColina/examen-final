@@ -1,0 +1,101 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Hotel Alonso - Servicios {%endblock%}
+{%block content%}
+<main>
+
+    <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">SERVICIOS</h2>
+                    <hr class="divider" />
+                    <br>
+                    <img class="img-fluid" src="{%static 'img/servicios.png'%}" alt="">
+                </div>
+            </div>  
+        </div>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-12 text-center">
+                    <div class="container text-center">
+                        <br><br>
+                        <a class="btn btn-primary btn-xl" href="#nuevo">Nuevo Servicio</a>
+                    </div>
+                    <br><br><br>
+                    <div class="alert  alert-warning" role="alert">
+                        <p>Aclaración: No todas las habitaciones cuentan con todos los servicios.</p>
+                    </div>
+                    <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Cod</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tarifa</th>
+                        <th scope="col">Descripción</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in servicios %}
+                    <tr>
+                        <th scope="row">{{s.id}}</th>
+                        <td>{{s.nombre}}</td>
+                        <td class="text-end">$ {{s.tarifa}}</td>
+                        <td>{{s.descripción}}</td>
+                        <td><a href="editar_servicio/{{s.id}}" class="btn btn-block btn-sm btn-success">Editar</a></td>
+                        <td><a href="eliminar_servicio/{{s.id}}" class="btn btn-block btn-sm btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>  
+        </div>
+    </section>
+
+    <section id="nuevo" class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">CARGAR NUEVO SERVICIO</h2>
+                    <hr class="divider" />
+                    <br>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <br><br><br>
+                    <form action="/servicios/registrar_servicio/" method="POST">{% csrf_token %}
+                        
+                        <div class="form-floating mb-3">
+                            <input name="nombre" class="form-control" id="name" type="text" placeholder="Ingrese el nombre..." data-sb-validations="required" />
+                            <label for="name">Nombre del servicio</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Debe ingresar un nombre de servicio</div>
+                        </div>
+                    
+                        <div class="form-floating mb-3">
+                            <input name="tarifa" class="form-control" type="number" placeholder="Ingrese la tarifa..." data-sb-validations="required" />
+                            <label for="email">Tarifa</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere ingresar una tarifa para el servicio</div>
+                            
+                        </div>
+
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea name="descrip" class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                            <label for="message">Descripción del servicio</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Describa el servicio.</div>
+                        </div>
+                        <div class="d-grid">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Agregar">
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{%endblock%}

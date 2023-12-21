@@ -1,0 +1,56 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Hotel Alonso - Habitaciones {%endblock%}
+{%block content%}
+<main>
+
+    <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">HABITACIONES</h2>
+                    <hr class="divider" />
+                    <p class="text-muted mb-5">Administración de las habitaciones del hotel</p>
+                    <img class="img-fluid" src="{%static 'img/double-bed.png'%}" alt="">
+                </div>
+            </div>
+            
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-12 text-center">
+                        <br><br><br>
+                        <div class="alert  alert-warning text-start" role="alert">
+                            <p>Los precios son de acuerdo al estado de la habitación y también se tienen en cuenta los servicios incluidos</p>
+                        </div>
+                        <br>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cod</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Servicios</th>
+                            <th scope="col">Tarifa</th>
+                            <th scope="col">Ocupada</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for h in habitaciones %}
+                        <tr>
+                            <th scope="row">{{h.id}}</th>
+                            <td>{{h.tipo}}</td>
+                            <td class="text-start">          
+                                {% for servicios in h.servicios.all %}{{ servicios }} | {% endfor %}
+                            </td>
+                            <td>$  {{h.tarifa}}</td>
+                            <td>{{h.ocupada}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>  
+            </div>
+        </section>
+
+</main>
+{%endblock%}

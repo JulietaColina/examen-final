@@ -1,0 +1,56 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Editar Servicio {{servicio.nombre}}{%endblock%}
+{%block content%}
+<main>
+
+    <section id="nuevo" class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">EDITAR SERVICIO: {{servicio.nombre}}</h2>
+                    <hr class="divider" />
+                    <br>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <br><br><br>
+                    <form action="{%url 'edicionS'%}" method="POST">{% csrf_token %}
+                        
+                        <div class="form-floating mb-3">
+                            <input value="{{ servicio.id }}" name="id" class="form-control" type="hidden" />
+                            <label for="name">Código de Servicio</label>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input value="{{ servicio.nombre }}" name="nombre" class="form-control" id="name" type="text" placeholder="Ingrese el nombre..." data-sb-validations="required" />
+                            <label for="name">Nombre del servicio</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Debe ingresar un nombre de servicio</div>
+                        </div>
+                    
+                        <div class="form-floating mb-3">
+                            <input value="{{ servicio.tarifa }}" name="tarifa" class="form-control" type="number" placeholder="Ingrese la tarifa..." data-sb-validations="required" />
+                            <label for="email">Tarifa</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Se requiere ingresar una tarifa para el servicio</div>
+                            
+                        </div>
+
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea name="descrip" class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required">{{servicio.descripción}}</textarea>
+                            <label for="message">Descripción del servicio</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Describa el servicio.</div>
+                        </div>
+                        <div class="d-grid">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Modificar">
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{%endblock%}

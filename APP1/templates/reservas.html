@@ -1,0 +1,116 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Hotel Alonso - Servicios {%endblock%}
+{%block content%}
+<main>
+
+    <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">RESERVAS</h2>
+                    <hr class="divider" />
+                    <br>
+                    <img class="img-fluid" src="{%static 'img/servicios.png'%}" alt="">
+                </div>
+            </div>  
+        </div>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-12 text-center">
+                    <div class="container text-center">
+                        <br><br>
+                        <a class="btn btn-primary btn-xl" href="#nuevo">Nueva Reserva</a>
+                    </div>
+                    <br><br><br>
+                    <div class="alert  alert-warning" role="alert">
+                        <p>Aquí se realizan las reservas.</p>
+                    </div>
+                    <br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Cod</th>
+                        <th scope="col">Habitación</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Cant. de días</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for r in reservas %}
+                    <tr>
+                        <th scope="row">{{r.id}}</th>
+                        <td>{{r.habitación}}</td>
+                        <td class="text-end">{{r.cliente}}</td>
+                        <td>{{r.cant_días}}</td>
+                        <td><a href="editar_reserva/{{r.id}}" class="btn btn-block btn-sm btn-success">Editar</a></td>
+                        <td><a href="eliminar_reserva/{{r.id}}" class="btn btn-block btn-sm btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>  
+        </div>
+    </section>
+
+    <section id="nuevo" class="page-section">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">CARGAR NUEVA RESERVA</h2>
+                    <hr class="divider" />
+                    <br>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <br><br>
+                    <form action="{%url 'nueva_reserva'%}" method="POST">{% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <select name="hab" class="form-control" >
+                                {% for h in hab %}                         
+                                {% if h.ocupada %}
+                                {% else %}
+                                <option value="{{h.id}}">
+                                        {{h.id}} - 
+                                        {{h.tipo}} $ {{h.tarifa}} | Servicios:
+                                        {% for servicios in h.servicios.all %}+{{ servicios }} {% endfor %}
+                                </option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                            <label for="habitación">Habitación</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required"></div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select name="cliente" class="form-control" id="hab">
+                                {% for c in clientes %}                     
+                                <option value="{{c.id}}">
+                                    {{c.id}} - {{c.dni}}
+                                    {{c.nombre}} {{c.apellido}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="habitación">Cliente</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input value="{{ reserva.cant_días }}" name="días" class="form-control" id="días" type="number" placeholder="Cliente..." data-sb-validations="required" />
+                            <label for="días">Cant. días</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required"></div>
+                        </div>
+
+                        <div class="d-grid">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Agregar">
+                        </div>                        
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{%endblock%}

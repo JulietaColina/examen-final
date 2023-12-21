@@ -1,0 +1,69 @@
+{%extends "template_padre.html"%}
+{% load static %}
+{%block title%} Editar Reservas {%endblock%}
+{%block content%}
+<main>
+
+    <section id="nuevo" class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">EDITAR RESERVA</h2>
+                    <hr class="divider" />
+                    <br>
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+                    <br><br>
+                    <form action="{%url 'edicionR'%}" method="POST">{% csrf_token %}
+                        
+                        <div class="form-floating mb-3">
+                            <input value="{{ reserva.id }}" name="id" class="form-control" type="hidden" />
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select name="hab" class="form-control" >
+                                <option value="{{reserva.habitación.id}}">{{reserva.habitación}}</option>
+                                {% for h in hab %}                         
+                                <option value="{{h.id}}">
+                                    {{h.id}} - 
+                                    {{h.tipo}} $ {{h.tarifa}} | Servicios:
+                                    {% for servicios in h.servicios.all %}+{{ servicios }}  {% endfor %}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="habitación">Habitación</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required"></div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select name="cliente" class="form-control" id="hab">
+                                <option value="{{reserva.cliente.id}}">{{reserva.cliente}}</option>
+                                {% for c in clientes %}                     
+                                <option value="{{c.id}}">
+                                    {{c.id}} - {{c.dni}}
+                                    {{c.nombre}} {{c.apellido}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="habitación">Cliente</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input value="{{ reserva.cant_días }}" name="días" class="form-control" id="días" type="number" placeholder="Cliente..." data-sb-validations="required" />
+                            <label for="días">Cant. días</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required"></div>
+                        </div>
+
+                        <div class="d-grid">
+                            <input class="btn btn-primary btn-xl" type="submit" value="Modificar">
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{%endblock%}
